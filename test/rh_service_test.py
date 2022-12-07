@@ -4,7 +4,7 @@ from src.aluno.base.professor import Professor
 from src.aluno.base.sta import STA
 from src.aluno.base.terceirizado import Terceirizado
 from src.aluno.manager.rh_service import RHService
-from src.cliente.irh_service import IRHService
+from src.cliente.tipo import Tipo
 
 
 class RHServiceCase(unittest.TestCase):
@@ -124,7 +124,7 @@ class RHServiceCase(unittest.TestCase):
         self.rh.cadastrar(profX)
 
         self.assertEqual([self.profAlessio, profChico, self.profJonas, profX],
-                         self.rh.getFuncionariosPorCategoria(IRHService.Tipo.PROF),
+                         self.rh.getFuncionariosPorCategoria(Tipo.PROF),
                          "A lista deve conter os mesmo funcionario e deve estar ordenada pelo nome funcionario")
 
     def test_buscarTodosOsSTAs(self):
@@ -142,7 +142,7 @@ class RHServiceCase(unittest.TestCase):
         self.test_inserirFuncionarios()
 
         self.assertEqual([self.tercAdriana, self.tercCarla],
-                         self.rh.getFuncionariosPorCategoria(IRHService.Tipo.TERC),
+                         self.rh.getFuncionariosPorCategoria(Tipo.TERC),
                          "A lista deve conter os mesmo funcionario e deve estar ordenada pelo nome funcionario")
 
     def test_buscarTodosOsFuncionarios(self):
@@ -219,7 +219,7 @@ class RHServiceCase(unittest.TestCase):
         self.assertEqual(18000.0, self.rh.calcularFolhaDePagamento(),"Soma de salarios incorreta")
 
     def test_calcularFolhaComDiarias(self):
-        self.assertEqual(0.0, self.rh.calcularFolhaDePagamento(), 0.01)
+        self.assertEqual(0.0, self.rh.calcularFolhaDePagamento())
 
         self.assertTrue(self.rh.cadastrar(self.profJonas))
         self.assertTrue(self.rh.cadastrar(self.staMiriam))
@@ -249,13 +249,13 @@ class RHServiceCase(unittest.TestCase):
         self.assertEqual(18400.0, self.rh.calcularFolhaDePagamento(), "Soma de salarios com diaria incorreta")
 
     def test_participacaoNosLucros(self):
-        self.assertEquals(0.0, self.rh.calcularFolhaDePagamento(), 0.01)
+        self.assertEquals(0.0, self.rh.calcularFolhaDePagamento())
 
         self.assertTrue(self.rh.cadastrar(self.profJonas))
         self.assertTrue(self.rh.cadastrar(self.staMiriam))
         self.assertTrue(self.rh.cadastrar(self.tercCarla))
 
-        self.assertEquals(10000.0, self.rh.calcularFolhaDePagamento(), 0.01)
+        self.assertEquals(10000.0, self.rh.calcularFolhaDePagamento())
 
         self.assertTrue(self.rh.partilharLucros(6.00))
 
@@ -270,7 +270,7 @@ class RHServiceCase(unittest.TestCase):
     def test_iniciandoNovoMes(self):
         self.test_calcularFolhaComPL()
         self.rh.iniciarMes()
-        self.assertEqual(10000.0, self.rh.calcularFolhaDePagamento(), 0.01)
+        self.assertEqual(10000.0, self.rh.calcularFolhaDePagamento())
 
 
 if __name__ == '__main__':
