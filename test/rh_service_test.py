@@ -124,7 +124,7 @@ class RHServiceCase(unittest.TestCase):
         self.rh.cadastrar(profX)
 
         self.assertEqual([self.profAlessio, profChico, self.profJonas, profX],
-                         self.rh.getFuncionariosPorCategoria(Tipo.PROF),
+                         self.rh.getFuncionariosPorCategorias(Tipo.PROF),
                          "A lista deve conter os mesmo funcionario e deve estar ordenada pelo nome funcionario")
 
     def test_buscarTodosOsSTAs(self):
