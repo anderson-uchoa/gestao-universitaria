@@ -1,5 +1,7 @@
 class Funcionario:
 
+    def __init__(self, cpf, nome, cargo):
+        pass
     def getNome(self) -> str:
         return None
 
