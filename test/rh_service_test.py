@@ -60,7 +60,7 @@ class RHServiceCase(unittest.TestCase):
 
     def test_cadastrarSTAComNivelInvalido(self):
         self.assertFalse(self.rh.cadastrar(STA(self.cpfNulo, "claudio", 35)), "Nao podemos cadastrar sta com nivel invalido")
-        self.assertEquals(0, self.rh.getTotalFuncionarios(), "Funcionario cadastrado indevidamente")
+        self.assertEqual(0, self.rh.getTotalFuncionarios(), "Funcionario cadastrado indevidamente")
 
     def test_inserirFuncionarios(self):
         self.assertTrue(self.rh.cadastrar(self.profAlessio), "O terceirizado deveria ter sido adicionado")
@@ -135,7 +135,7 @@ class RHServiceCase(unittest.TestCase):
         self.rh.cadastrar(profX)
 
         self.assertEqual([self.staLacerda, self.staMiriam],
-                         self.rh.getFuncionariosPorCategorias(STA),
+                         self.rh.getFuncionariosPorCategorias(Tipo.STA),
                          "A lista deve conter os mesmo funcionario e deve estar ordenada pelo nome funcionario")
 
     def test_buscarTodosOsTerceirizados(self):
@@ -249,17 +249,17 @@ class RHServiceCase(unittest.TestCase):
         self.assertEqual(18400.0, self.rh.calcularFolhaDePagamento(), "Soma de salarios com diaria incorreta")
 
     def test_participacaoNosLucros(self):
-        self.assertEquals(0.0, self.rh.calcularFolhaDePagamento())
+        self.assertEqual(0.0, self.rh.calcularFolhaDePagamento())
 
         self.assertTrue(self.rh.cadastrar(self.profJonas))
         self.assertTrue(self.rh.cadastrar(self.staMiriam))
         self.assertTrue(self.rh.cadastrar(self.tercCarla))
 
-        self.assertEquals(10000.0, self.rh.calcularFolhaDePagamento())
+        self.assertEqual(10000.0, self.rh.calcularFolhaDePagamento())
 
         self.assertTrue(self.rh.partilharLucros(6.00))
 
-        self.assertEquals(2002.0, self.rh.calcularSalarioDoFuncionario(self.cpfMiriam),
+        self.assertEqual(2002.0, self.rh.calcularSalarioDoFuncionario(self.cpfMiriam),
                           "Salarios com participacao nos lucros incorreto")
 
     def test_calcularFolhaComPL(self):
